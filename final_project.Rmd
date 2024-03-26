@@ -1,0 +1,47 @@
+---
+title: "`r paste(params$selection,'Report')`"
+author: "Yingte Liu"
+date: "`r Sys.Date()`"
+output: html_document
+params:
+  production: TRUE
+  selection: camera
+  year: 2007
+---
+
+# Introduction
+
+## Dataset
+This dataset is curated by an enthusiastic photographer who describe cameras released from 1994 to 2007 by 13 properties. Original dataset could be found here: https://www.kaggle.com/datasets/crawford/1000-cameras-dataset?resource=download
+
+## Purpose For This Project
+I am aiming to provide an automated report for people who want to see the summary of camera information on a specific year. It will pop up 1) a table that describes all cameras released on that year based on their properties and 2) a visualization from Principle Component Analysis, aims to distinguish the camera brands by their properties, and figure out the influencial factors of prices by biplots.
+
+# Data Analysis
+## Read-in Data & Create Table
+
+```{r, set-chunk-opts, echo = FALSE, eval = params$production}
+library(knitr)
+opts_chunk$set(
+  echo = FALSE, warning = FALSE, message = FALSE
+)
+```
+
+```{r,echo=T}
+library(dplyr)
+library(ggplot2)
+library(FactoMineR)
+library(here)
+setwd("/Users/liuyingte/Desktop/Emory/BIOS/550/Final_project")
+```
+```{r}
+readRDS(here("output/table.RDS"))
+```
+
+The table provided above offers a detailed statistical analysis of cameras released during a user-specified period, with a particular focus on comparing models introduced around 2007 to those launched at different times. The statistical evaluation includes P-values obtained through the Wilcoxon rank-sum test. For continuous variables, the analysis presents both the median and the Interquartile Range (IQR), facilitating a comprehensive comparison of camera specifications across different release periods.
+
+## PCA: Biplots
+```{r}
+readRDS(here("output/PCA.RDS"))
+```
+The figure depicted above showcases a biplot resulting from Principal Component Analysis (PCA), with blue vectors representing the loading vectors and points denoting cameras released in 2007. This plot reveals that the first two principal components account for approximately 47% of the variance in the dataset, offering a moderate overview of the data's structure. Vectors pointing in similar directions suggest a positive correlation between their respective variables, while vectors oriented in divergent directions typically indicate a negative correlation. Notably, the plot suggests a positive correlation between the price and resolution of the cameras, with no apparent relationship to focal length, weight, or dimensions. Brands like Sony, Nikon, and Canon are highlighted for their cameras with superior resolution. The clustering of most cameras, irrespective of brand, suggests that the characteristics of these cameras are relatively uniform, providing consumers in 2007 with a variety of similar options. However, for those prioritizing resolution, Sony, Nikon, and Canon cameras stand out as prime choices.
