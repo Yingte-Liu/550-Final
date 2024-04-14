@@ -17,3 +17,6 @@ report.html: output/PCA.RDS output/table.RDS
 clean:
 	rm output/*.RDS final_project.html
 
+.PHONY: install
+install:
+	Rscript -e "renv::restore(prompt=FALSE)"
