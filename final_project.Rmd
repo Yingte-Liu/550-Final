@@ -32,7 +32,7 @@ library(dplyr)
 library(ggplot2)
 library(FactoMineR)
 library(here)
-setwd("/Users/liuyingte/Desktop/Emory/BIOS/550/Final_project")
+here::i_am("final_project.Rmd")
 ```
 ```{r}
 readRDS(here("output/table.RDS"))
