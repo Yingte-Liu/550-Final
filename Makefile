@@ -23,9 +23,10 @@ install:
 
 PROJECTFILES = final_project.Rmd code/report_render.R code/Data.R code/PCA.R code/Table.R Makefile
 RENVFILES = renv.lock renv/activate.R renv/settings.json
+
 project_image: Dockerfile $(PROJECTFILES) $(RENVFILES)
-	docker build -t project_image . 
+	docker run gustavo0730/project_image 
 	touch $@ 
 
 final_report/final_project.html: project_image
-	docker run -v "$$(pwd)/final_report":/project/final_report project_image
+	docker run -v "$(pwd)/final_report":/project/final_report gustavo0730/project_image
