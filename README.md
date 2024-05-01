@@ -23,3 +23,10 @@
 `renv.lock`
 - lock file that can restore the environment
 
+Build Docker image:
+- execute command: make project_image will help you generate the image I use
+
+Create the report:
+- after create the image, execute command: make final_report/final_project.html will generate the report in the folder final_report
+
+
