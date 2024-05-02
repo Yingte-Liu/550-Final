@@ -29,4 +29,4 @@ project_image: Dockerfile $(PROJECTFILES) $(RENVFILES)
 	touch $@ 
 
 final_report/final_project.html: project_image
-	docker run -v "/Users/liuyingte/Desktop/Emory/BIOS/550/550final/Final_project/final_report":/project/final_report gustavo0730/final_image2
+	docker run -v "$(pwd)/final_report":/project/final_report gustavo0730/final_image2
