@@ -24,6 +24,3 @@ COPY renv/settings.json renv
 RUN Rscript -e "renv::restore(prompt=F)"
 RUN mkdir final_report
 CMD make && mv final_project.html final_report
-
-
-
